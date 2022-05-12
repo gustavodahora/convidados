@@ -14,7 +14,7 @@ class GuestRepository private constructor(context: Context) {
         private lateinit var repository: GuestRepository
 
         fun getInstance(context: Context): GuestRepository {
-            if (::repository.isInitialized) {
+            if (!::repository.isInitialized) {
                 repository = GuestRepository(context)
             }
             return repository

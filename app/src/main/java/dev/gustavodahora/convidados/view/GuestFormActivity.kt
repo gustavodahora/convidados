@@ -12,7 +12,7 @@ import dev.gustavodahora.convidados.databinding.ActivityGuestFormBinding
 
 class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var viewModel: GuestFormViewModel
+    private lateinit var viewModel: GuestFormViewModel
     lateinit var binding: ActivityGuestFormBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         val id = v?.id
         if (id == R.id.button_save) {
-            val name = binding.editName.toString()
+            val name = binding.editName.text.toString()
             val presence = binding.radioPresence.isChecked
             viewModel.save(name, presence)
         }
@@ -42,12 +42,11 @@ class GuestFormActivity : AppCompatActivity(), View.OnClickListener {
             } else {
                 Toast.makeText(applicationContext, "Falha", Toast.LENGTH_SHORT).show()
             }
+            finish()
         })
     }
 
     private fun setListeners() {
-        binding.buttonSave.setOnClickListener {
-
-        }
+        binding.buttonSave.setOnClickListener(this)
     }
 }
